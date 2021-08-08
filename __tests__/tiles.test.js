@@ -44,6 +44,21 @@ describe('Endpoint tests for Tile model', () => {
         );
     });
 
+    it('GET: gets one Tile by id', async() => {
+        const response = await request(app)
+            .get('/api/v1/tiles/1');
+
+        expect(response.body).toEqual(
+            {
+                id: '1',
+                material: 'ceramic',
+                shape: 'square',
+                color: 'green',
+                cost: 2
+            }
+        );
+    });
+
     it('PUT: updates a Tile by id', async() => {
         const response = await request(app)
             .put('/api/v1/tiles/1')
