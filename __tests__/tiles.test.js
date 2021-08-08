@@ -44,7 +44,7 @@ describe('Endpoint tests for Tile model', () => {
         );
     });
 
-    it('GET: gets one Tile by id', async() => {
+    it('GET: gets one tile by id', async() => {
         const response = await request(app)
             .get('/api/v1/tiles/1');
 
