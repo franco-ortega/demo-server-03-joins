@@ -30,6 +30,15 @@ describe('Endpoint tests for Tile model', () => {
     });
 
     it('GET: gets all Tiles', async() => {
+        await request(app)
+            .post('/api/v1/tiles')
+            .send({
+                material: 'stone',
+                shape: 'circle',
+                color: 'grey',
+                cost: 5
+            });
+
         const response = await request(app)
             .get('/api/v1/tiles');
 
@@ -40,6 +49,13 @@ describe('Endpoint tests for Tile model', () => {
                 shape: 'square',
                 color: 'green',
                 cost: 2
+            },
+            {
+                id: '2',
+                material: 'stone',
+                shape: 'circle',
+                color: 'grey',
+                cost: 5
             }]
         );
     });
