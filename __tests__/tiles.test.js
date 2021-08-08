@@ -48,7 +48,6 @@ describe('Endpoint tests for Tile model', () => {
         const response = await request(app)
             .put('/api/v1/tiles/1')
             .send({
-                id: 1,
                 material: 'ceramic',
                 shape: 'square',
                 color: 'green',
