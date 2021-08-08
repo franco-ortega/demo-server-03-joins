@@ -28,4 +28,19 @@ describe('Endpoint tests for Tile model', () => {
                 }
             );
     });
+
+    it('GET: gets all Tiles', async() => {
+        const response = await request(app)
+            .get('/api/v1/tiles');
+
+            expect(response.body).toEqual(
+                {
+                    id: '1',
+                    material: 'ceramic',
+                    shape: 'square',
+                    color: 'green',
+                    cost: 2
+                }
+            );
+    });
 });
