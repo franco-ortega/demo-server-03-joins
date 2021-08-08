@@ -1,11 +1,12 @@
 const fs = require('fs');
 const app = require('../lib/app');
 const request = require('supertest');
+const pool = require('../lib/utils/pool');
 
 describe('Endpoint tests for Tile model', () => {
-    it('sample test', () => {
-        expect(true).toBe(true);
-    });
+    beforeEach(() => pool.query(fs.readFileSync('./sql/database.sql', 'utf-8')));
+
+    afterAll(() => pool.end());
 
     it('POST: creates a new Tile', async() => {
         const response = await request(app)
@@ -14,16 +15,16 @@ describe('Endpoint tests for Tile model', () => {
                 material: 'ceramic',
                 shape: 'square',
                 color: 'green',
-                cost: 1.5
+                cost: 2
             });
 
             expect(response.body).toEqual(
                 {
-                    id: 1,
+                    id: '1',
                     material: 'ceramic',
                     shape: 'square',
                     color: 'green',
-                    cost: 1.5
+                    cost: 2
                 }
             );
     });
