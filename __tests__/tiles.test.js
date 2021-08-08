@@ -44,7 +44,7 @@ describe('Endpoint tests for Tile model', () => {
         );
     });
 
-    it('PUT: updates a Tile', async() => {
+    it('PUT: updates a Tile by id', async() => {
         const response = await request(app)
             .put('/api/v1/tiles/1')
             .send({
@@ -53,6 +53,21 @@ describe('Endpoint tests for Tile model', () => {
                 color: 'green',
                 cost: 5
             });
+
+            expect(response.body).toEqual(
+                {
+                    id: '1',
+                    material: 'ceramic',
+                    shape: 'square',
+                    color: 'green',
+                    cost: 5
+                }
+            );
+    });
+
+    it('DELETE: deletes a Tile by id', async() => {
+        const response = await request(app)
+            .delete('/api/v1/tiles/1');
 
             expect(response.body).toEqual(
                 {
