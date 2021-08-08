@@ -1,0 +1,32 @@
+{
+  "name": "demo-server-03-joins",
+  "description": "server demo",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franco-ortega/demo-server-03-joins.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "Franco Ortega",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/franco-ortega/demo-server-03-joins/issues"
+  },
+  "homepage": "https://github.com/franco-ortega/demo-server-03-joins#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "jest": "^27.0.6",
+    "supertest": "^6.1.4"
+  }
+}
