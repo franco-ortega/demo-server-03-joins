@@ -43,4 +43,26 @@ describe('Endpoint tests for Tile model', () => {
             }]
         );
     });
+
+    it('PUT: updates a Tile', async() => {
+        const response = await request(app)
+            .put('/api/v1/tiles/1')
+            .send({
+                id: 1,
+                material: 'ceramic',
+                shape: 'square',
+                color: 'green',
+                cost: 5
+            });
+
+            expect(response.body).toEqual(
+                {
+                    id: '1',
+                    material: 'ceramic',
+                    shape: 'square',
+                    color: 'green',
+                    cost: 5
+                }
+            );
+    });
 });
