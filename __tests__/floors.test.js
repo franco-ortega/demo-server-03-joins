@@ -8,7 +8,7 @@ describe('Endpoint tests for Floor model', () => {
 
     afterAll(() => pool.end());
 
-    it('POST: creates a new Floor', async() => {
+    it('POST: creates a new floor', async() => {
         const response = await request(app)
             .post('/api/v1/floors')
             .send({
@@ -24,6 +24,42 @@ describe('Endpoint tests for Floor model', () => {
                 length: 10,
                 width: 5
             }
+        );
+    });
+
+    it('GET: gets all floors', async() => {
+        await request(app)
+            .post('/api/v1/floors')
+            .send({
+                room: 'kitchen',
+                length: 10,
+                width: 5
+        });
+
+        await request(app)
+            .post('/api/v1/floors')
+            .send({
+                room: 'bathroom',
+                length: 6,
+                width: 4
+        });
+
+        const response = await request(app)
+            .get('/api/v1/floors');
+
+        expect(response.body).toEqual(
+            [{
+                id: '1',
+                room: 'kitchen',
+                length: 10,
+                width: 5
+            },
+            {
+                id: '2',
+                room: 'bathroom',
+                length: 6,
+                width: 4
+            }]
         );
     });
 
