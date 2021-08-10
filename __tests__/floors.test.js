@@ -34,7 +34,7 @@ describe('Endpoint tests for Floor model', () => {
                 room: 'kitchen',
                 length: 10,
                 width: 5
-        });
+            });
 
         await request(app)
             .post('/api/v1/floors')
@@ -42,7 +42,7 @@ describe('Endpoint tests for Floor model', () => {
                 room: 'bathroom',
                 length: 6,
                 width: 4
-        });
+            });
 
         const response = await request(app)
             .get('/api/v1/floors');
@@ -60,6 +60,36 @@ describe('Endpoint tests for Floor model', () => {
                 length: 6,
                 width: 4
             }]
+        );
+    });
+
+    it('GET: gets one floor by id', async() => {
+        const floor = await request(app)
+            .post('/api/v1/floors')
+            .send({
+                room: 'kitchen',
+                length: 10,
+                width: 5
+            });
+
+        await request(app)
+            .post('/api/v1/floors')
+            .send({
+                room: 'bathroom',
+                length: 6,
+                width: 4
+            });
+
+        const response = await request(app)
+            .get(`/api/v1/floors${floor.id}`);
+
+        expect(response.body).toEqual(
+            {
+                id: '1',
+                room: 'kitchen',
+                length: 10,
+                width: 5
+            }
         );
     });
 
