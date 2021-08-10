@@ -10,18 +10,16 @@ describe('Endpoint tests for Floor model', () => {
 
     it('POST: creates a new Floor', async() => {
         const response = await request(app)
-          .post('/api/v1/floors')
-          .send(
-              {
-                  room: 'kitchen',
-                  length: 10,
-                  width: 5
-              }
-          );
+            .post('/api/v1/floors')
+            .send({
+                room: 'kitchen',
+                length: 10,
+                width: 5
+            });
 
         expect(response.body).toEqual(
             {
-                id: 1,
+                id: '1',
                 room: 'kitchen',
                 length: 10,
                 width: 5
