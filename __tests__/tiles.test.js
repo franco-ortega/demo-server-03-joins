@@ -4,7 +4,7 @@ const request = require('supertest');
 const pool = require('../lib/utils/pool');
 
 describe('Endpoint tests for Tile model', () => {
-    beforeAll(() => pool.query(fs.readFileSync('./sql/database.sql', 'utf-8')));
+    beforeEach(() => pool.query(fs.readFileSync('./sql/database.sql', 'utf-8')));
 
     afterAll(() => pool.end());
 
@@ -30,6 +30,24 @@ describe('Endpoint tests for Tile model', () => {
     });
 
     it('GET: gets all Tiles', async() => {
+        await request(app)
+            .post('/api/v1/tiles')
+            .send({
+                material: 'ceramic',
+                shape: 'square',
+                color: 'green',
+                cost: 2
+            });
+
+        await request(app)
+            .post('/api/v1/tiles')
+            .send({
+                material: 'stone',
+                shape: 'circle',
+                color: 'grey',
+                cost: 5
+            });
+
         const response = await request(app)
             .get('/api/v1/tiles');
 
@@ -40,11 +58,27 @@ describe('Endpoint tests for Tile model', () => {
                 shape: 'square',
                 color: 'green',
                 cost: 2
+            },
+            {
+                id: '2',
+                material: 'stone',
+                shape: 'circle',
+                color: 'grey',
+                cost: 5
             }]
         );
     });
 
     it('GET: gets one tile by id', async() => {
+        await request(app)
+            .post('/api/v1/tiles')
+            .send({
+                material: 'ceramic',
+                shape: 'square',
+                color: 'green',
+                cost: 2
+            });
+
         const response = await request(app)
             .get('/api/v1/tiles/1');
 
@@ -60,6 +94,15 @@ describe('Endpoint tests for Tile model', () => {
     });
 
     it('PUT: updates a Tile by id', async() => {
+        await request(app)
+            .post('/api/v1/tiles')
+            .send({
+                material: 'ceramic',
+                shape: 'square',
+                color: 'green',
+                cost: 2
+            });
+
         const response = await request(app)
             .put('/api/v1/tiles/1')
             .send({
@@ -81,6 +124,15 @@ describe('Endpoint tests for Tile model', () => {
     });
 
     it('DELETE: deletes a Tile by id', async() => {
+        await request(app)
+            .post('/api/v1/tiles')
+            .send({
+                material: 'ceramic',
+                shape: 'square',
+                color: 'green',
+                cost: 5
+            });
+
         const response = await request(app)
             .delete('/api/v1/tiles/1');
 
