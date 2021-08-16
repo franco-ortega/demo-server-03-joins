@@ -65,7 +65,7 @@ describe('Endpoint tests for Floor model', () => {
     });
 
     it('GET: gets one floor by id', async() => {
-        const floor1 = await Floor.insert(
+        const floor = await Floor.insert(
             {
                 room: 'kitchen',
                 length: 10,
@@ -73,35 +73,15 @@ describe('Endpoint tests for Floor model', () => {
             }
         );
 
-        const floor2 = await Floor.insert(
-            {
-                room: 'bathroom',
-                length: 6,
-                width: 4
-            }
-        );
+        const response = await request(app)
+            .get(`/api/v1/floors/${floor.id}`);
 
-        const response1 = await request(app)
-            .get(`/api/v1/floors/${floor1.id}`);
-
-        const response2 = await request(app)
-            .get(`/api/v1/floors/${floor2.id}`);
-
-        expect(response1.body).toEqual(
+        expect(response.body).toEqual(
             {
                 id: '1',
                 room: 'kitchen',
                 length: 10,
                 width: 5
-            }
-        );
-
-        expect(response2.body).toEqual(
-            {
-                id: '2',
-                room: 'bathroom',
-                length: 6,
-                width: 4
             }
         );
     });
