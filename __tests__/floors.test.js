@@ -87,16 +87,24 @@ describe('Endpoint tests for Floor model', () => {
     });
 
     it('PUT: updates one floor by id', async() => {
-        const floor = await Floor.insert(
-            {
+        // const floor = await Floor.insert(
+        //     {
+        //         room: 'kitchen',
+        //         length: 10,
+        //         width: 5
+        //     }
+        // );
+
+        const floor = await request(app)
+            .post('/api/v1/floors')
+            .send({
                 room: 'kitchen',
                 length: 10,
                 width: 5
-            }
-        );
+            });
 
         const response = await request(app)
-            .put(`/api/v1/floors/${floor.id}`)
+            .put('/api/v1/floors/1')
             .send(
                 {
                     room: 'kitchen',
@@ -105,7 +113,11 @@ describe('Endpoint tests for Floor model', () => {
                 }
             );
 
-        expect(response.body).toEqual(
+        console.log('FLOOR BODY: ' + floor.body);
+        console.log('FLOOR BODY ID: ' + floor.body.id);
+        console.log('FLOOR RESPONSE BODY: ' + response.body);
+
+        expect(response.text).toEqual(
             {
                 id: '1',
                 room: 'kitchen',
@@ -114,5 +126,8 @@ describe('Endpoint tests for Floor model', () => {
             }
         );
     });
+
+
+    
 
 });
