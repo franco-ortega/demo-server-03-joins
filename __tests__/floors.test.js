@@ -114,8 +114,8 @@ describe('Endpoint tests for Floor model', () => {
         expect(response.body).toEqual({
             id: '1',
             room: 'kitchen',
-            length: 12,
-            width: 7
+            length: 10,
+            width: 5
         });
     });
 });
