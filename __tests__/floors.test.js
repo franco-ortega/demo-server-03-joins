@@ -86,4 +86,33 @@ describe('Endpoint tests for Floor model', () => {
         );
     });
 
+    it('PUT: updates one floor by id', async() => {
+        const floor = await Floor.insert(
+            {
+                room: 'kitchen',
+                length: 10,
+                width: 5
+            }
+        );
+
+        const response = await request(app)
+            .put(`/api/v1/floors/${floor.id}`)
+            .send(
+                {
+                    room: 'kitchen',
+                    length: 12,
+                    width: 7
+                }
+            );
+
+        expect(response.body).toEqual(
+            {
+                id: '1',
+                room: 'kitchen',
+                length: 12,
+                width: 7
+            }
+        );
+    });
+
 });
